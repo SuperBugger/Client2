@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">KNOOPS&amp;M</string>
+    <string-array name="group_names">
+        <item><font fgcolor="@color/white" size = "25">KNOOPS&amp;M PRO</font></item>
+        <item><font fgcolor="@color/white" size = "25">KNOOPS YOUNG</font></item>
+        <item><font fgcolor="@color/white" size = "25">ЮЛА PRO</font></item>
+        <item><font fgcolor="@color/white" size = "25">ЮЛА YOUNG</font></item>
+    </string-array>
+    <string name="fst_room">Зал 1</string>
+    <string name="snd_room">Зал 2</string>
+    <string name="current_date">%s</string>
+    <string name="start_time">%s</string>
+    <string name="end_time">%s</string>
+    <string name="start"><font fgcolor="@color/white" size = "20">c</font></string>
+    <string name="end"><font fgcolor="@color/white" size = "20">до</font></string>
+    <string name="description"><font fgcolor="@color/white" size = "20">Введите описание</font></string>
+    <string name="add_event"><font fgcolor="@color/white" size = "20">Добавить занятие</font></string>
+    <string name="del_event"><font fgcolor="@color/white" size = "20">Удалить занятие</font></string>
+    <string name="dayDay">dayDay</string>
+    <string name="dayDate">dayDate</string>
+</resources>
