@@ -8,6 +8,8 @@
     </string-array>
     <string name="fst_room">Зал 1</string>
     <string name="snd_room">Зал 2</string>
+    <string name="reg_txt">Register</string>
+    <string name="login_txt">Login</string>
     <string name="current_date">%s</string>
     <string name="start_time">%s</string>
     <string name="end_time">%s</string>
@@ -18,4 +20,19 @@
     <string name="del_event"><font fgcolor="@color/white" size = "20">Удалить занятие</font></string>
     <string name="dayDay">dayDay</string>
     <string name="dayDate">dayDate</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_email">Enter</string>
+    <string name="prompt_name">Name</string>
+    <string name="prompt_surname">Surname</string>
+    <string name="prompt_trainer_code">Trainer Code</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="register"><font fgcolor="@color/white" size = "20">SIGN UP</font></string>
+    <string name="login"><font fgcolor="@color/white" size = "20">LOGIN</font></string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>

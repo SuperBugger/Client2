@@ -274,17 +274,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //метод отправки данных о новой тренировке на сервер
-    void sendTrainingToServer(Train train) {
+    void sendTrainingToServer(Training training) {
         String url = "https://523a-185-32-134-61.ngrok-free.app/api/data";
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("room", train.getRoom());
-            jsonObject.put("group", train.getGroup());
-            jsonObject.put("date", train.getDate().toString());
-            jsonObject.put("startTime", train.getTimeStart().toString());
-            jsonObject.put("endTime", train.getTimeEnd().toString());
-            jsonObject.put("description", train.getDescription());
+            jsonObject.put("room", training.getRoom());
+            jsonObject.put("group", training.getGroup());
+            jsonObject.put("date", training.getDate().toString());
+            jsonObject.put("startTime", training.getTimeStart().toString());
+            jsonObject.put("endTime", training.getTimeEnd().toString());
+            jsonObject.put("description", training.getDescription());
         } catch (JSONException e) {
             e.printStackTrace();
         }

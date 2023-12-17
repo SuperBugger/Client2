@@ -142,9 +142,9 @@ public class DialogClass extends DialogFragment {
 
                 if (_stReqTime.isAfter(_startStTime) && _stReqTime.isBefore(_startEdTime) && _edReqTime.isAfter(_endStTime) && _edReqTime.isBefore(_endEdTime)){
 
-                    Train train = new Train(room, group, date, startTime, endTime, textInput);
+                    Training training = new Training(room, group, date, startTime, endTime, textInput);
                     MainActivity mainActivity = new MainActivity();
-                    mainActivity.sendTrainingToServer(train);
+                    mainActivity.sendTrainingToServer(training);
                     Toast.makeText(getContext(), "Занятие добавлено", Toast.LENGTH_SHORT).show();
                     dismiss();
 

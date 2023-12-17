@@ -1,6 +1,6 @@
 package com.doroshenko.client;
 
-public class Train {
+public class Training {
     public  String Room;
     public String Group;
     public String Date;
@@ -8,7 +8,7 @@ public class Train {
     public String TimeEnd;
     public String Description;
 
-    public Train(String room, String group, String date, String timeStart, String timeEnd, String description) {
+    public Training(String room, String group, String date, String timeStart, String timeEnd, String description) {
         Room = room;
         Group = group;
         Date = date;
