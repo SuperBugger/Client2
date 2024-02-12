@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_timetable"
+        android:title="Расписание"
+        android:icon="@drawable/timetable_selected"/>
+
+    <item
+        android:id="@+id/navigation_adminpanel"
+        android:title="Админ панель"
+        android:icon="@drawable/adminpanel_selected"/>
+
+</menu>

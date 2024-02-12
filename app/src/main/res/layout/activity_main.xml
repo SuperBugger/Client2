@@ -5,18 +5,18 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/openDialogButton"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="65dp"
+        android:layout_marginBottom="85dp"
         android:layout_marginEnd="15dp"
-        android:background="@drawable/round"
+        android:background="@drawable/add_training_button_states"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/main_layout"/>
+        app:layout_constraintEnd_toEndOf="@+id/main_layout"
+        android:visibility="gone"/>
 
 
     <LinearLayout
@@ -37,7 +37,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_weight="1" >
+                android:layout_weight="0.5" >
             </Space>
 
             <LinearLayout
@@ -89,7 +89,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_weight="1" >
+                android:layout_weight="0.5" >
             </Space>
         </LinearLayout>
         <HorizontalScrollView
@@ -115,7 +115,7 @@
 
         <com.doroshenko.client.TimeLineLayout_1
             android:id="@+id/timeLine"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
             android:clipToPadding="false"
@@ -123,10 +123,24 @@
             app:dividerColor="@color/time_line"
             app:dividerTextColor="@color/white"
             app:eachRowHeight="23dp"
+            android:layout_marginStart="-15dp"
             app:minimumPercentage="0.25"
             app:numberOfRows="14" />
 
     </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_navigation_bar_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_navigation_menu"
+        app:itemIconTint="@drawable/bottom_navigation_selector"
+        app:labelVisibilityMode="unlabeled"
+        app:itemHorizontalTranslationEnabled="false"
+        app:itemIconSize="30dp"
+        android:visibility="gone"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

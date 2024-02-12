@@ -5,11 +5,14 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -21,10 +24,19 @@ import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class DialogClass extends DialogFragment {
@@ -35,6 +47,7 @@ public class DialogClass extends DialogFragment {
     private Button datePicker, startTimePicker, endTimePicker, addEvent;
     private TextView dateText;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    private List<String> newGroupNames = new ArrayList<>();
 
     @SuppressLint("CutPasteId")
     @Override
@@ -49,18 +62,24 @@ public class DialogClass extends DialogFragment {
 
         AlertDialog dialog = builder.create();
         dialog.show();
-        dialog.getWindow().setLayout(1000, 1500);
+        dialog.getWindow().setLayout(1000, 1000);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         roomSwitch = (Switch) dialog.findViewById(R.id.switch_room);
         groupSpinner = (Spinner) dialog.findViewById(R.id.spinner);
         description = (EditText) dialog.findViewById(R.id.description);
-        addEvent = (Button) dialog.findViewById(R.id.add_event);
+        addEvent = (Button) dialog.findViewById(R.id.add_new_group_btn);
         datePicker = (Button) dialog.findViewById(R.id.date_button);
         startTimePicker = (Button) dialog.findViewById(R.id.time_picker_start_btn);
         endTimePicker = (Button) dialog.findViewById(R.id.time_picker_end_btn);
         dateText = (TextView) dialog.findViewById(R.id.date_text);
 
+        //блок получения всех групп и их вставка в spinner
+        Context dialogContext = getContext();
+        getAllGroups();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(dialogContext, R.layout.spinner_item, newGroupNames);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        groupSpinner.setAdapter(adapter);
 
         datePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +94,7 @@ public class DialogClass extends DialogFragment {
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                                dateText.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year);
+                                dateText.setText("  " + dayOfMonth + "." + (monthOfYear + 1) + "." + year);
 
                             }
                         }, mYear, mMonth, mDay);
@@ -124,11 +143,15 @@ public class DialogClass extends DialogFragment {
         addEvent.setOnClickListener(new  View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                String room;
-                if(roomSwitch.isChecked())room = "2";
-                else room = "1";
+                Integer room;
+                if(roomSwitch.isChecked())room = 2;
+                else room = 1;
                 String group = groupSpinner.getSelectedItem().toString();
-                String date = dateText.getText().toString();
+                String date = dateText.getText().toString().substring(2);
+                String[] dateArray = date.split("\\.");
+                List<String> list = Arrays.asList(dateArray);
+                Collections.reverse(list);
+                date = TextUtils.join("-", list);
                 String startTime = startTimePicker.getText().toString();
                 String endTime = endTimePicker.getText().toString();
                 String textInput = description.getText().toString();
@@ -142,10 +165,11 @@ public class DialogClass extends DialogFragment {
 
                 if (_stReqTime.isAfter(_startStTime) && _stReqTime.isBefore(_startEdTime) && _edReqTime.isAfter(_endStTime) && _edReqTime.isBefore(_endEdTime)){
 
-                    Training training = new Training(room, group, date, startTime, endTime, textInput);
+                    Training training = new Training(room, group, date, startTime+":00", endTime+":00", textInput);
                     MainActivity mainActivity = new MainActivity();
                     mainActivity.sendTrainingToServer(training);
                     Toast.makeText(getContext(), "Занятие добавлено", Toast.LENGTH_SHORT).show();
+                    // TODO: разобраться с выводом тостов
                     dismiss();
 
                 }
@@ -163,7 +187,7 @@ public class DialogClass extends DialogFragment {
         currentDateTextView.setText(formattedStringDate);
 
         currentDateTextView.setTextColor(Color.WHITE);
-        currentDateTextView.setTextSize(25);
+        currentDateTextView.setTextSize(15);
 
         Button currentTimeButtonStart = (Button) dialog.findViewById(R.id.time_picker_start_btn);
         Button currentTimeButtonEnd = (Button) dialog.findViewById(R.id.time_picker_end_btn);
@@ -178,12 +202,39 @@ public class DialogClass extends DialogFragment {
         currentTimeButtonEnd.setText(formattedStringTimeEnd);
 
         currentTimeButtonStart.setTextColor(Color.WHITE);
-        currentTimeButtonStart.setTextSize(25);
+        currentTimeButtonStart.setTextSize(15);
         currentTimeButtonEnd.setTextColor(Color.WHITE);
-        currentTimeButtonEnd.setTextSize(25);
+        currentTimeButtonEnd.setTextSize(15);
 
         return dialog;
     }
 
+    //метод получения всех групп из бд
+    private void getAllGroups(){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Connection connection = DriverManager.getConnection("jdbc:postgresql://192.168.31.12:5432/knoops", User.getPhone(), User.getPassword());
+                    PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM dance_group;");
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()){
+                        newGroupNames.add(resultSet.getString("group_name"));
+                    }
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 

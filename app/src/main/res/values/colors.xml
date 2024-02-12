@@ -8,14 +8,16 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#FF101010</color>
-    <color name="not_selected_box_background">#1D2032</color>
+    <color name="not_selected_box_background">#282D38</color>
     <color name="not_selected_text">#617BC8</color>
     <color name="selected_box_background">#7899FE</color>
     <color name="selected_text">#FEFEFE</color>
     <color name="time_line">#404040</color>
-    <color name="dialog_select_background">#2B2F39</color>
-    <color name="gray">#BCBDC0</color>
+    <color name="dialog_select_background">#33394A</color>
+    <color name="gray">#9F9FA2</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="divider_color">#4e4e4e</color>
     <color name="title_color">#FFFFFF</color>
+    <color name="nonselected_bottom_navigation_menu_item">#777978</color>
+    <color name="group_line_background">#33394A</color>
 </resources>

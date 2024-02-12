@@ -3,11 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_centerInParent="true"
+    android:layout_gravity="center"
     android:background="@drawable/dialog_background"
     android:orientation="vertical">
-
+    <!--android:layout_centerInParent="true"-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,18 +16,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="30dp">
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fst_room"
-                android:textSize="27sp"
+                android:textSize="18sp"
+                android:layout_marginStart="50dp"
                 android:textColor="@color/white"/>
             <Space
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_weight="1" >
+                android:layout_weight="0.5" >
             </Space>
             <Switch
                 android:id="@+id/switch_room"
@@ -42,13 +42,14 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_weight="1" >
+                android:layout_weight="0.5" >
             </Space>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/snd_room"
-                android:textSize="27sp"
+                android:textSize="18sp"
+                android:layout_marginEnd="50dp"
                 android:textColor="@color/white"/>
 
         </LinearLayout>
@@ -65,7 +66,6 @@
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/group_names"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:popupBackground="@drawable/spinner_background"
@@ -77,8 +77,8 @@
                 android:layout_gravity="center_vertical|right"
                 android:layout_marginRight="15dp"
                 android:src="@drawable/baseline_keyboard_arrow_down_24"
-                android:scaleX="1.7"
-                android:scaleY="1.7"/>
+                android:scaleX="1.5"
+                android:scaleY="1.5"/>
         </FrameLayout>
 
         <FrameLayout
@@ -96,11 +96,11 @@
                 android:background="@drawable/spinner_background"/>
             <Button
                 android:id="@+id/date_button"
-                android:layout_height="25dp"
-                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:layout_width="20dp"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical|right"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="17dp"
                 android:background="@drawable/baseline_edit_calendar_24"/>
         </FrameLayout>
 
@@ -121,13 +121,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/start"
+                    android:textSize="10sp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="2dp"/>
 
                 <Button
                     android:id="@+id/time_picker_start_btn"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:background="@drawable/spinner_background"/>
 
             </LinearLayout>
@@ -146,12 +147,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/end"
+                    android:textSize="10sp"
                     android:layout_marginEnd="10dp"/>
 
                 <Button
                     android:id="@+id/time_picker_end_btn"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:background="@drawable/spinner_background"/>
 
             </LinearLayout>
@@ -164,16 +166,18 @@
             android:layout_height="wrap_content"
             android:maxHeight="119dp"
             android:hint="@string/description"
+            android:textColorHint="@color/gray"
             android:background="@drawable/spinner_background"
             android:layout_marginBottom="10dp"
+            android:textSize="15dp"
             style="@style/DescriptionText"/>
-        
+
         <Button
-            android:id="@+id/add_event"
+            android:id="@+id/add_new_group_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/add_event"
-            android:background="@drawable/add_event_background"
+            android:background="@drawable/button_background_states"
             android:textAllCaps="false"/>
 
     </LinearLayout>
